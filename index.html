@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Telegram Mini App</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: sans-serif;
+            background-color: #f0f0f0;
+        }
+        input[type="text"] {
+            padding: 10px;
+            margin-bottom: 10px;
+            width: 100%;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Feedback Form</h1>
+    <input type="text" id="feedbackText" placeholder="Введите свой отзыв">
+    <button id="sendButton">Отправить</button>
+
+    <script>
+        Telegram.WebApp.ready();
+
+        document.getElementById('sendButton').addEventListener('click', () => {
+            const feedbackText = document.getElementById('feedbackText').value;
+            Telegram.WebApp.sendData(JSON.stringify({ feedback: feedbackText }));
+            Telegram.WebApp.close(); // Закрыть Mini App после отправки
+        });
+    </script>
+</body>
+</html>
